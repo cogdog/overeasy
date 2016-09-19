@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<title>Twitter Avatars Over Easy</title>
+
+		<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+		<link rel='stylesheet' type='text/css' href='assets/css/style.css' />
+		<link rel='stylesheet' type='text/css' href='assets/css/bootstrap.css' />
+		<link rel='stylesheet' type='text/css' href='assets/css/prettify.css' />
+		
+		<style type='text/css'>
+		label, input, textarea {display:block;}
+		label {margin:1em, 0, 0; font-weight:900; }
+		input, textarea {width: 500px;}
+   		</style>
+
+		<!--[if lt IE 9]><script type='text/javascript' src='assets/javascript/html5.js'></script><![endif]-->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type='text/javascript' src='assets/javascript/prettify.js'></script>
+
+		<script type="text/javascript">
+    
+    	// SETUP
+        // default size for image 
+		var ps = 'normal';
+		
+		function getRandomInt(min, max) {
+		// ---- h/t http://stackoverflow.com/a/1527820/2418186
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}			
+
+		$(document).ready(function(){	
+			// set default value of form fields
+			$('#isize').val(ps);
+			
+			// get a default egg from one of the 6 colors
+			
+			random_egg = getRandomInt(1, 6);
+			
+			first_egg = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_' + random_egg + '_' + ps + '.png';
+			
+
+			
+			$("#egg").attr("src", first_egg);
+			
+			
+			function flip_eggs() {
+				tw_name = $('#twname').val();
+				
+				if (tw_name == '') {
+					cooked = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_' + random_egg + '_' + $('#isize').val() + '.png';
+				} else {
+					cooked = 'https://twitter.com/'+ tw_name + '/profile_image?size=' + $('#isize').val();
+				}	
+				
+				// update image
+				$("#egg").attr("src", cooked);	
+				
+				// make it the link for download
+				$("a#plate").attr('href', cooked);	
+			}
+			
+			$('#isize').change(function() {
+				 flip_eggs();
+			});
+
+			$('#twname').change(function() {
+				 flip_eggs();
+			});
+			
+			$('#kitchen').on('keyup keypress', function(e) {
+			  var keyCode = e.keyCode || e.which;
+			  if (keyCode === 13) { 
+				e.preventDefault();
+				return false;
+			  }
+});
+
+		});
+    </script>		
+
+	</head>
+	<body onload='prettyPrint()'>
+	
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+		  <div class="container">
+			<a class="brand" href="#">Twitter Avatars Over Easy</a>
+			<div class="nav-collapse">
+			  <ul class="nav">
+				<li class="active"><a href="#">Make It</a></li>
+				<li><a href="https://github.com/cogdog/overeasy">Code</a></li>
+				<li><a href="http://cog.dog/">by cogdog</a></li>
+			  </ul>
+			</div><!-- /.nav-collapse -->
+		  </div>
+		</div><!-- /navbar-inner -->
+	</div>
+		
+  <div class='row-fluid'>
+  		<div class='hero-unit' id="home">
+			<header>
+				<h1 class=''>Twitter Avatars Over Easy</h1>
+				<p>Getting Twitter avatars as easy as frying eggs</p>
+			</header>
+
+			
+			<h2 id="maker">Flip Yer Eggs</h2>
+			<p>Get an avatar image for your favorite twitter persona</p>
+			
+			
+			
+			
+		<form id="kitchen">
+	  	<label for="isize"></label>
+	  	
+	  	<span class="label label-important">desired image size</span><br />
+	  	<select id="isize">
+	  		<option value="mini">mini (24px x 24px)</option>
+	  		<option value="normal">normal (48px x 48px)</option>
+	  		<option value="bigger">bigger (73px x 73px)</option>
+	  		<option value="original">original</option>
+	  	</select>
+	  	
+	  	<label for="twname"></label>
+	  	<span class="label label-important">twitter name (leave the @ in the sink) press tab to trigger</span>
+	  	<input type="text" id="twname" value="" />
+	  	
+	  	<label for="flipeggs"></label>
+	  	
+	  	<span class="label label-important">eggs are ready</span><br />
+	  	<a href="" id="plate" download>Download</a>
+	  	
+	  	</form>
+
+		<img id="egg" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_3_normal.png" alt="twitter avatar icon" />
+
+        
+	
+		</div>	
+<footer class="span12">
+<div class="alert">
+ a barking dog production &bull; <a href="http://cog.dog/">cog.dog</a> &bull; <a href="http://cogdogblog.com">cogdogblog.com</a>
+</div>
+</footer>
+			</div>
+
+		
+		<a href='https://github.com/cogdog/overeasy' class='github-ribbon'><img src='assets/images/github-ribbons/white.png' /></a>
+	</div>	
+	</body>
+</html>
