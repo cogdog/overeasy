@@ -12,6 +12,8 @@
 		label, input, textarea {display:block;}
 		label {margin:1em, 0, 0; font-weight:900; }
 		input, textarea {width: 500px;}
+		
+		a.btn-egg {color: #ccc; }
    		</style>
 
 		<!--[if lt IE 9]><script type='text/javascript' src='assets/javascript/html5.js'></script><![endif]-->
@@ -25,31 +27,34 @@
 		var ps = 'normal';
 		
 		function getRandomInt(min, max) {
+		// generate random integer between min and max
 		// ---- h/t http://stackoverflow.com/a/1527820/2418186
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}			
 
 		$(document).ready(function(){	
-			// set default value of form fields
+			// set default value of size menu
 			$('#isize').val(ps);
 			
-			// get a default egg from one of the 6 colors
-			
+			// get a default egg color from one of the 6  twitter provides
 			random_egg = getRandomInt(1, 6);
 			
+			// assemble URL for default egg and set the URL for the img tag
 			first_egg = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_' + random_egg + '_' + ps + '.png';
-			
-
-			
 			$("#egg").attr("src", first_egg);
 			
 			
 			function flip_eggs() {
+			// update the image and the size
+				
+				// get the twitter name entered
 				tw_name = $('#twname').val();
 				
 				if (tw_name == '') {
+					// no twitter name, so serve up the egg in the size selected
 					cooked = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_' + random_egg + '_' + $('#isize').val() + '.png';
 				} else {
+					// we got a titter handle, generate the URL to the API to return image URL
 					cooked = 'https://twitter.com/'+ tw_name + '/profile_image?size=' + $('#isize').val();
 				}	
 				
@@ -60,22 +65,17 @@
 				$("a#plate").attr('href', cooked);	
 			}
 			
+			// start cooking if the size menu is changed
 			$('#isize').change(function() {
 				 flip_eggs();
 			});
 
-			$('#twname').change(function() {
-				 flip_eggs();
-			});
-			
-			$('#kitchen').on('keyup keypress', function(e) {
-			  var keyCode = e.keyCode || e.which;
-			  if (keyCode === 13) { 
-				e.preventDefault();
-				return false;
-			  }
-});
-
+			// serve up avatar if the form is submitted
+			$( "#kitchen" ).submit(function( event ) {
+				flip_eggs();
+				event.preventDefault();
+			});	
+					
 		});
     </script>		
 
@@ -107,7 +107,7 @@
 
 			
 			<h2 id="maker">Flip Yer Eggs</h2>
-			<p>Get an avatar image for your favorite twitter persona (based on <a href="http://stackoverflow.com/a/30322178/2418186">some Stack Overflow goodness</a>)</p>
+			<p>Get an avatar image for your favorite twitter persona like... @cogdog! (based on <a href="http://stackoverflow.com/a/30322178/2418186">some Stack Overflow goodness</a>)</p>
 				
 			
 		<form id="kitchen">
@@ -122,28 +122,39 @@
 	  	</select>
 	  	
 	  	<label for="twname"></label>
-	  	<span class="label label-important">twitter name (leave the @ in the sink) press tab to trigger</span>
+	  	<span class="label label-important">twitter name (leave the @ in the sink)</span>
 	  	<input type="text" id="twname" value="" />
 	  	
 	  	<label for="flipeggs"></label>
 	  	
 	  	<span class="label label-important">eggs are ready</span><br />
-	  	<a href="" id="plate" download>Download</a>
-	  	
+	  	<input type="submit" name="flip" value="Get Avatar">
+
+
 	  	</form>
 
-		<img id="egg" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_3_normal.png" alt="twitter avatar icon" />
+		<div class="row-fluid">
+			<div class="span1">&nbsp</div>
+			
+			<div class="span3">
+			 	
 
-        
-	
-		</div>	
-<footer class="span12">
-<div class="alert">
- a barking dog production &bull; <a href="http://cog.dog/">cog.dog</a> &bull; <a href="http://cogdogblog.com">cogdogblog.com</a>
-</div>
-</footer>
+				<img id="egg" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_3_normal.png" alt="twitter avatar icon" />
+			</div>
+			<div class="span2"> 	
+				<a href="" id="plate" class="btn btn-primary btn-large btn-egg" download>Download Avatar</a>
+			</div>
+		
 			</div>
 
+		<div class="span12">&nbsp;</div>
+		
+		<footer class="span12">
+		<div class="alert">
+		 a barking dog production &bull; <a href="http://cog.dog/">cog.dog</a> &bull; <a href="http://cogdogblog.com">cogdogblog.com</a>
+		</div>
+		</footer>
+	
 		
 		<a href='https://github.com/cogdog/overeasy' class='github-ribbon'><img src='assets/images/github-ribbons/white.png' /></a>
 	</div>	
