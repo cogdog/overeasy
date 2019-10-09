@@ -1,6 +1,8 @@
 # ![Egg](https://abs.twimg.com/sticky/default_profile_images/default_profile_5_bigger.png) Twitter Avatars Over Easy
 *Getting Twitter avatars as easy as frying eggs... try it http://cogdog.github.io/overeasy*
 
+** Note ** This no longer works (thanks twitter for always changing your API!) Try instead https://www.avatars.io/
+
 Sometimes you just go down a small coding hole... In our work for [announcing Virtually Connecting events](http://virtuallyconnecting.org/category/announcements/) we end up having to find twitter avatar images to represent participants on the images used in the blog posts. It takes about 4 clicks and web page views to search for an account, and download an image.
 
 Surely there is an easier way (*I will stop calling you Shirley*). The first few results I found for web tools to do this were old, based on the  defunct 1.0 API or just plain dead domains. As the web crumbles.
